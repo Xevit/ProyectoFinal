@@ -17,12 +17,7 @@ FichaActual = new function() {
 }
 
 var FichaP1 = new FichaActual();
-
-FichaP1.prototype.sprite = 'chmure';
-
 var FichaP2 = new FichaActual();
-
-FichaP2.prototype.sprite = 'murcame';
 
 Elec = new function() {
 	this.ficha = function() {
