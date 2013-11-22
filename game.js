@@ -68,7 +68,7 @@ var FichaPropiedades = {
   murcame: {u:CAMPO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:2 },        		//media ficha muralla media ficha campo con escudo
   ciucame: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:1 },        		//ciudad con un lado de campo con escudo
   ciucam2e: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CAMPO, cont:2 },        		//ciudad con 2 lados opuestos de campo con escudo
-};
+}; 
 Inicio = new function() {
 	alert.("holaaaaa");
 	Elegir = function() {
