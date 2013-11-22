@@ -70,14 +70,12 @@ var FichaPropiedades = {
   ciucam2e: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CAMPO, cont:2 },        		//ciudad con 2 lados opuestos de campo con escudo
 };
 Inicio = new function() {
-	alert.("holaaaaa");
 	Elegir = function() {
 		var aleatorio = random.sprites();
 		while (FichaPropiedades[aleatorio].cont == 0){
 			aleatorio = random.sprites();
 		}
 		//aleatorio.cont = aleatorio.cont - 1;
-		alert(aleatorio);
 		return aleatorio;	
 	};	
 
@@ -94,12 +92,10 @@ Inicio = new function() {
 	Initialize = function(){
 			randoms = Elegir();
 			var ficha_inicial = new Ficha(394, 263, randoms);
-			//alert(ficha_inicial);
-			//$("resultado").html(ficha_inicial);
-			$("#content span").html(ficha_inicial);
+			{{ficha_inicial}};
+	
 	};	
 
-};
-$(function() {
+$(function()) {
     Inicio();
 });

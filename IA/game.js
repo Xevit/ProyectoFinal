@@ -7,6 +7,10 @@
 //    -------
 //       3
 
+
+FICHA_H = 62;
+FICHA_W = 62;
+
 var sprites = {
         m: { sx: 253, sy: 44, w: FICHA_W, h: FICHA_H},                //monasterio
         mc: { sx: 331, sy: 44, w: FICHA_W, h: FICHA_H},                //monasterio con camino
@@ -65,26 +69,34 @@ var FichaPropiedades = {
   ciucame: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:1 },        		//ciudad con un lado de campo con escudo
   ciucam2e: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CAMPO, cont:2 },        		//ciudad con 2 lados opuestos de campo con escudo
 };
+Inicio = new function() {
+	Elegir = function() {
+		var aleatorio = random.sprites();
+		while (FichaPropiedades[aleatorio].cont == 0){
+			aleatorio = random.sprites();
+		}
+		//aleatorio.cont = aleatorio.cont - 1;
+		return aleatorio;	
+	};	
 
-var Elegir = function() {
-	aleatorio = random.sprites();
-	while (FichaPropiedades[aleatorio].cont == 0){
-		aleatorio = random.sprites();
-	}
-	//aleatorio.cont = aleatorio.cont - 1;
-	return aleatorio;	
+	Ficha = function(x, y,sprite) {
+    	    this.x = x;
+    	    this.y = y;
+    	    this.w = FICHA_W;
+    	    this.h = FICHA_H;
+    	    this.sprite = sprite;
+			this.prop = FichaPropiedades[sprite]; 
+	};
+
+	//Función que una las dos antriores
+	Initialize = function(){
+			randoms = Elegir();
+			var ficha_inicial = new Ficha(394, 263, randoms);
+			{{ficha_inicial}};
+	
+	};	
+
 };
-
-Ficha = function(x, y, sprite) {
-        this.x = x;
-        this.y = y;
-        this.w = FICHA_W;
-        this.h = FICHA_H;
-        this.sprite = sprite;
-				this.prop = FichaPropiedades[sprite]; 
-
-//Función que una las dos antriores
-
 $(function() {
-    Game.initialize("juego");
+    Inicio();
 });
