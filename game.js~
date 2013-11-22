@@ -67,20 +67,23 @@ var FichaPropiedades = {
 };
 
 var Elegir = function() {
-	aleatorio = random.FichaPropiedades();
-	while (aleatorio.cont == 0){
-		aleatorio = random.FichaPropiedades();
+	aleatorio = random.sprites();
+	while (FichaPropiedades[aleatorio].cont == 0){
+		aleatorio = random.sprites();
 	}
-	return aleatorio;	
+	//aleatorio.cont = aleatorio.cont - 1;
+	return sprites[aleatorio];	
 };
 
-var Ficha = new function (prop){
-	this.sprite = sprites[prop];
-	this.arriba = prop.u;
-	this.derecha = prop.r;
-	this.abajo = prop.d;
-	this.izquierda = prop.l;	
-};
+Ficha = function(x, y, sprite) {
+        this.x = x;
+        this.y = y;
+        this.w = FICHA_W;
+        this.h = FICHA_H;
+        this.sprite = sprite;
+				this.prop = FichaPropiedades[sprite]; 
+
+//Función que una las dos antriores
 
 $(function() {
     Game.initialize("juego");

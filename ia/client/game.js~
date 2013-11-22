@@ -1,0 +1,62 @@
+var FICHA_H = 62;
+var FICHA_W = 62;
+
+var sprites = {
+        m: { sx: 253, sy: 44, w: FICHA_W, h: FICHA_H},                //monasterio
+        mc: { sx: 331, sy: 44, w: FICHA_W, h: FICHA_H},                //monasterio con camino
+        cr: { sx: 563, sy: 44, w: FICHA_W, h: FICHA_H},                //camino recto
+        cc: { sx: 485, sy: 44, w: FICHA_W, h: FICHA_H},                //camino curva
+        c3: { sx: 640, sy: 44, w: FICHA_W, h: FICHA_H},                //cruce de 3 caminos
+        c4: { sx: 408, sy: 44, w: FICHA_W, h: FICHA_H},                //cruce de 4 caminos
+        cmur: { sx: 408, sy: 137, w: FICHA_W, h: FICHA_H},        //camino recto con muralla al lado(una de las fichas es la inicial)
+        ccmur: { sx: 485, sy: 137, w: FICHA_W, h: FICHA_H},        //camino con curva y con muralla al lado
+        chmur: { sx: 175, sy: 137, w: FICHA_W, h: FICHA_H},        //camino hacia muralla
+        chmure: { sx: 21, sy: 230, w: FICHA_W, h: FICHA_H},        //camino hacia muralla con escudo
+        c3mur: { sx: 98, sy: 44, w: FICHA_W, h: FICHA_H},                //cruce de 3 caminos con muralla al lado
+        ccmur2: { sx: 717, sy: 137, w: FICHA_W, h: FICHA_H},        //camino con curva con 2 lados de ciudad contiguos
+        ccmur2e: { sx: 98, sy: 230, w: FICHA_W, h: FICHA_H},        //camino con curva con 2 lados de ciudad contiguos con escudo
+        ccmur3: { sx: 562, sy: 137, w: FICHA_W, h: FICHA_H},        //camino con curva y muralla al lado(otro)
+        murcam: { sx: 21, sy: 44, w: FICHA_W, h: FICHA_H},        //media ficha muralla media ficha campo
+        murcame: { sx: 176, sy: 230, w: FICHA_W, h: FICHA_H},        //media ficha muralla media ficha campo con escudo
+        mur2: { sx: 176, sy: 44, w: FICHA_W, h: FICHA_H},                //una muralla a cada lado de la ficha
+        mur2c: { sx: 253, sy: 137, w: FICHA_W, h: FICHA_H},        //2 murallas en lados contiguos
+        mur1: { sx: 330, sy: 137, w: FICHA_W, h: FICHA_H},        //1 muralla en un lado y el resto campo
+        ciudad: { sx: 21, sy: 137, w: FICHA_W, h: FICHA_H},        //todo ciudad con escudo
+        ciucam: { sx: 98, sy: 137, w: FICHA_W, h: FICHA_H},        //ciudad con un lado de campo
+        ciucame: { sx: 331, sy: 230, w: FICHA_W, h: FICHA_H},        //ciudad con un lado de campo con escudo
+        ciucam2: { sx: 640, sy: 137, w: FICHA_W, h: FICHA_H},        //ciudad con 2 lados opuestos de campo
+        ciucam2e: { sx: 408, sy: 230, w: FICHA_W, h: FICHA_H},        //ciudad con 2 lados opuestos de campo con escudo
+        interrogante: { sx: 253, sy: 230, w: FICHA_W, h: FICHA_H}        //ficha con un interrogante
+};
+
+
+//Es un singleton
+FichaActual = new function() {
+        this.girada = false;
+        this.h = FICHA_H;
+        this.w = FICHA_W;
+        this.x = 990;
+        this.y = 100;
+        this.sprite = 'interrogante';
+        
+        //Devuelve true si se gira la ficha
+        this.revelar_ficha = function(x, y) {
+                if (this.sprite === 'interrogante') {
+                        this.sprite = sprites.random(); //PEDIR A LA IA!!!, de momento ponemos una ficha cualquiera
+                        return true;
+                }
+        alert('Ya has girado la ficha');
+                return false;
+        }
+        //tendra que informar al resto de clientes que ficha le ha salido a este jugador
+        //tiene que comprobar que el que hace click es el jugador al que le toca jugar, si no no puede mover
+
+        this.draw = function(ctx) {
+                SpriteSheet.draw(ctx,this.sprite,this.x,this.y,0);
+        }
+
+};
+
+$(function() {
+    Game.initialize("tablero",sprites,startGame);
+});
