@@ -44,30 +44,30 @@ var CAMINO = 'camino';
 var CAMPO = 'campo;'
 
 var FichaPropiedades = {
-	murcam: {u:CAMPO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:5 },        			//media ficha muralla media ficha campo
-	c3mur: {u:CAMINO, r:CAMINO, d:CAMINO, l:CASTILLO, cont:3 },           //cruce de 3 caminos con muralla al lado
-	mur2: {u:CAMPO, r:CASTILLO, d:CAMPO, l:CASTILLO, cont:3 },               //una muralla a cada lado de la ficha
-	m: {u: CAMPO, r:CAMPO, d:CAMPO, l:CAMPO , cont:4},                		//monasterio
-  mc: {u:CAMPO, r:CAMINO, d:CAMPO, l:CAMPO, cont:2 },                		//monasterio con camino
-	c4: {u:CAMINO, r:CAMINO, d:CAMINO, l:CAMINO, cont:1 },                //cruce de 4 caminos
-	cc: {u:CAMINO, r:CAMINO, d:CAMPO, l:CAMPO, cont:9 },                	//camino curva
-  cr: {u:CAMPO, r:CAMINO, d:CAMPO, l:CAMINO, cont:8 },                	//camino recto
- 	c3: {u:CAMINO, r:CAMINO, d:CAMINO, l:CAMPO, cont:4 },                	//cruce de 3 caminos
-	ciudad: {u:CASTILLO, r:CASTILLO, d:CASTILLO, l:CASTILLO, cont:1},        			//todo ciudad con escudo
-	ciucam: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:3 },        			//ciudad con un lado de campo
-	chmur: {u:CASTILLO, r:CAMINO, d:CASTILLO, l:CASTILLO, cont:1 },   		//camino hacia muralla
+	murcam: {u:CAMPO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:5 },        		//media ficha muralla media ficha campo
+	c3mur: {u:CAMINO, r:CAMINO, d:CAMINO, l:CASTILLO, cont:3 },           		//cruce de 3 caminos con muralla al lado
+	mur2: {u:CAMPO, r:CASTILLO, d:CAMPO, l:CASTILLO, cont:3 },               	//una muralla a cada lado de la ficha
+	m: {u: CAMPO, r:CAMPO, d:CAMPO, l:CAMPO , cont:4},                			//monasterio
+  	mc: {u:CAMPO, r:CAMINO, d:CAMPO, l:CAMPO, cont:2 },                			//monasterio con camino
+	c4: {u:CAMINO, r:CAMINO, d:CAMINO, l:CAMINO, cont:1 },                		//cruce de 4 caminos
+	cc: {u:CAMINO, r:CAMINO, d:CAMPO, l:CAMPO, cont:9 },                		//camino curva
+ 	 cr: {u:CAMPO, r:CAMINO, d:CAMPO, l:CAMINO, cont:8 },                		//camino recto
+ 	c3: {u:CAMINO, r:CAMINO, d:CAMINO, l:CAMPO, cont:4 },                		//cruce de 3 caminos
+	ciudad: {u:CASTILLO, r:CASTILLO, d:CASTILLO, l:CASTILLO, cont:1},        	//todo ciudad con escudo
+	ciucam: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:3 },        		//ciudad con un lado de campo
+	chmur: {u:CASTILLO, r:CAMINO, d:CASTILLO, l:CASTILLO, cont:1 },   			//camino hacia muralla
 	mur2c: {u:CASTILLO, r:CAMPO, d:CAMPO, l:CASTILLO, cont:2 },        			//2 murallas en lados contiguos
 	mur1: {u:CAMPO, r:CAMPO, d:CAMPO, l:CASTILLO, cont:5 },        				//1 muralla en un lado y el resto campo
  	cmur: {u:CAMINO, r:CAMPO, d:CAMINO, l:CASTILLO, cont:3 },        			//camino recto con muralla al lado(una de las fichas es la inicial)
- 	ccmur: {u:CAMINO, r:CAMINO, d:CAMPO, l:CASTILLO, cont:3 },        		//camino con curva y con muralla al lado
+ 	ccmur: {u:CAMINO, r:CAMINO, d:CAMPO, l:CASTILLO, cont:3 },        			//camino con curva y con muralla al lado
 	ccmur3: {u:CAMPO, r:CAMINO, d:CAMINO, l:CASTILLO, cont:3 },        			//camino con curva y muralla al lado(otro)
 	ciucam2: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CAMPO, cont:1 },        		//ciudad con 2 lados opuestos de campo
 	ccmur2: {u:CAMINO, r:CAMINO, d:CASTILLO, l:CASTILLO, cont:3 },	 			//camino con curva con 2 lados de ciudad contiguos
  	chmure: {u:CASTILLO, r:CAMINO, d:CASTILLO, l:CASTILLO, cont:2 }, 			//camino hacia muralla con escudo
-  ccmur2e: {u:CAMINO, r:CAMINO, d:CASTILLO, l:CASTILLO, cont:2 },     		//camino con curva con 2 lados de ciudad contiguos con escudo
-  murcame: {u:CAMPO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:2 },        		//media ficha muralla media ficha campo con escudo
-  ciucame: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:1 },        		//ciudad con un lado de campo con escudo
-  ciucam2e: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CAMPO, cont:2 },        		//ciudad con 2 lados opuestos de campo con escudo
+  	ccmur2e: {u:CAMINO, r:CAMINO, d:CASTILLO, l:CASTILLO, cont:2 },     		//camino con curva con 2 lados de ciudad contiguos con escudo
+  	murcame: {u:CAMPO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:2 },        		//media ficha muralla media ficha campo con escudo
+  	ciucame: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:1 },        	//ciudad con un lado de campo con escudo
+  	ciucam2e: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CAMPO, cont:2 },        		//ciudad con 2 lados opuestos de campo con escudo
 
 }; 
 
@@ -81,7 +81,7 @@ var Aleatorio = function(){
 };
 
 //Función Inicio, iniciamos la creación de una ficha aleatoria
-var Inicio = new function() {
+
 		//Le pasamos la función aleatorio para que elija un sprite y se lo pasamos
 		// al diccionario FichaPropiedades para poder consultar si el cont = 0
 		Elegir = function() {
@@ -110,12 +110,19 @@ var Inicio = new function() {
 			return ficha_inicial;
 			//$("resultado").html(ficha_inicial);
 			//$("#content span").html(ficha_inicial);
-	};	
+	};
+	//Función que compara los lados derecha e izquierda
+	Comparar = function(f1,f2){
+		if(f1.prop.r == f2.prop.l)
+			alert("Coincide!");
+		else
+			alert("No Coincide!");
 
-};
+	};	
 $(function() {
     var Ficha1 = Initialize();
 	var Ficha2 = Initialize();
+	Comparar(Ficha1, Ficha2);
 	alert(Ficha1.sprite.nombre);
 	alert(Ficha2.sprite.nombre);
 });
