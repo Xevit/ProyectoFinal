@@ -128,7 +128,7 @@ var FichaPropiedades = {
 	};
 	// He hecho esta función provisional para comparar y posicionar fichas
 	// Nos pasan una posición para saber si ahí se puede poner una ficha.
-	// Y nosotros le vamos dando la vuelta y comparando posiciones.
+	// y nosotros le vamos dando la vuelta y comparando posiciones.
 	PosicionarFicha = function(tablero, ficha){
 		if (tablero[36][36].prop.r == ficha.prop.l)
 			alert("Ficha Posicionada 0");
@@ -142,6 +142,7 @@ var FichaPropiedades = {
 			alert("No se puede posicionar");
 	};
 	
+	//Desde aquí ejecutamos todo el código.
 	EjecutaTotal = function(){
 		var Ficha1 = Initialize();
 		var Ficha2 = Initialize();
