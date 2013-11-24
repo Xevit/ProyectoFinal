@@ -71,33 +71,28 @@ var FichaPropiedades = {
 
 }; 
 
+//Creo el array y luego hago el random del número que le pasamos al array
 var Aleatorio = function(){
-	alert("entro en aleatorio");
+
 	conjunto = _.toArray(sprites);
-	//alert(conjunto[0].nombre);
+
 	var a = Math.floor(Math.random()*26)
-	alert(a);	
-	alert("sale del random");
 	return conjunto[a];
 };
 
+//Función Inicio, iniciamos la creación de una ficha aleatoria
 var Inicio = new function() {
-	 Elegir = function() {
-		alert("entro en elegir");
-		var aleatorio= Aleatorio();
-		alert("despues del aleatorio");
-		alert(aleatorio.nombre);
-		while (FichaPropiedades[aleatorio.nombre].cont == 0){
-			alert("dentro del while");
-			aleatorio= Aleatorio();
-		}
-		//aleatorio.cont = aleatorio.cont - 1;
-		alert ("dentro de elegir2");
-		alert(FichaPropiedades[aleatorio.nombre].cont);
-		//alert(aleatorio);
+		//Le pasamos la función aleatorio para que elija un sprite y se lo pasamos
+		// al diccionario FichaPropiedades para poder consultar si el cont = 0
+		Elegir = function() {
+			var aleatorio= Aleatorio();
+			while (FichaPropiedades[aleatorio.nombre].cont == 0){
+				aleatorio= Aleatorio();
+			}
+
 		return aleatorio;	
 	};	
-
+	// Definimos la variable genérica ficha. La útlima propiedad es la ficha elegida
 	Ficha = function(x, y,sprite) {
     	    this.x = x;
     	    this.y = y;
@@ -108,18 +103,23 @@ var Inicio = new function() {
 
 	};
 
-	//Función que una las dos antriores
+	//Función que llama a Elegir() para obtener una ficha aleatoria
 	Initialize = function(){
-			alert("dentro de initialize");
 			randoms = Elegir();
 			var ficha_inicial = new Ficha(394, 263, randoms);
-			alert(ficha_inicial.prop.cont);
+			return ficha_inicial;
 			//$("resultado").html(ficha_inicial);
 			//$("#content span").html(ficha_inicial);
 	};	
 
 };
 $(function() {
-	alert("entes de initialize");
-    Initialize();
+    var Ficha1 = Initialize();
+	var Ficha2 = Initialize();
+	alert(Ficha1.sprite.nombre);
+	alert(Ficha2.sprite.nombre);
 });
+
+
+
+
