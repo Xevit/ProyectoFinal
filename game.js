@@ -66,8 +66,7 @@ var FichaPropiedades = {
   	ccmur2e: {u:CAMINO, r:CAMINO, d:CASTILLO, l:CASTILLO, cont:2 },     		//camino con curva con 2 lados de ciudad contiguos con escudo
   	murcame: {u:CAMPO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:2 },        		//media ficha muralla media ficha campo con escudo
   	ciucame: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:1 },        	//ciudad con un lado de campo con escudo
-  	ciucam2e: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CAMPO, cont:2 },        		//ciudad con 2 lados opuestos de campo con escudo
-
+  	ciucam2e: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CAMPO, cont:2 }        		//ciudad con 2 lados opuestos de campo con escudo
 }; 
 
 	//Creo el array y luego hago el random del número que le pasamos al array
