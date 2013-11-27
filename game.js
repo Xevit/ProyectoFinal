@@ -43,39 +43,39 @@ var CAMINO = 'camino';
 var CAMPO = 'campo;'
 
 var FichaPropiedades = {
-	murcam: {u:CAMPO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:5 },        		//media ficha muralla media ficha campo
-	c3mur: {u:CAMINO, r:CAMINO, d:CAMINO, l:CASTILLO, cont:3 },           		//cruce de 3 caminos con muralla al lado
-	mur2: {u:CAMPO, r:CASTILLO, d:CAMPO, l:CASTILLO, cont:3 },               	//una muralla a cada lado de la ficha
-	m: {u: CAMPO, r:CAMPO, d:CAMPO, l:CAMPO , cont:4},                			//monasterio
-  	mc: {u:CAMPO, r:CAMINO, d:CAMPO, l:CAMPO, cont:2 },                			//monasterio con camino
-	c4: {u:CAMINO, r:CAMINO, d:CAMINO, l:CAMINO, cont:1 },                		//cruce de 4 caminos
-	cc: {u:CAMINO, r:CAMINO, d:CAMPO, l:CAMPO, cont:9 },                		//camino curva
- 	 cr: {u:CAMPO, r:CAMINO, d:CAMPO, l:CAMINO, cont:8 },                		//camino recto
- 	c3: {u:CAMINO, r:CAMINO, d:CAMINO, l:CAMPO, cont:4 },                		//cruce de 3 caminos
-	ciudad: {u:CASTILLO, r:CASTILLO, d:CASTILLO, l:CASTILLO, cont:1},        	//todo ciudad con escudo
-	ciucam: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:3 },        		//ciudad con un lado de campo
-	chmur: {u:CASTILLO, r:CAMINO, d:CASTILLO, l:CASTILLO, cont:1 },   			//camino hacia muralla
-	mur2c: {u:CASTILLO, r:CAMPO, d:CAMPO, l:CASTILLO, cont:2 },        			//2 murallas en lados contiguos
-	mur1: {u:CAMPO, r:CAMPO, d:CAMPO, l:CASTILLO, cont:5 },        				//1 muralla en un lado y el resto campo
- 	cmur: {u:CAMINO, r:CAMPO, d:CAMINO, l:CASTILLO, cont:3 },        			//camino recto con muralla al lado(una de las fichas es la inicial)
- 	ccmur: {u:CAMINO, r:CAMINO, d:CAMPO, l:CASTILLO, cont:3 },        			//camino con curva y con muralla al lado
-	ccmur3: {u:CAMPO, r:CAMINO, d:CAMINO, l:CASTILLO, cont:3 },        			//camino con curva y muralla al lado(otro)
-	ciucam2: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CAMPO, cont:1 },        		//ciudad con 2 lados opuestos de campo
-	ccmur2: {u:CAMINO, r:CAMINO, d:CASTILLO, l:CASTILLO, cont:3 },	 			//camino con curva con 2 lados de ciudad contiguos
- 	chmure: {u:CASTILLO, r:CAMINO, d:CASTILLO, l:CASTILLO, cont:2 }, 			//camino hacia muralla con escudo
-  	ccmur2e: {u:CAMINO, r:CAMINO, d:CASTILLO, l:CASTILLO, cont:2 },     		//camino con curva con 2 lados de ciudad contiguos con escudo
-  	murcame: {u:CAMPO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:2 },        		//media ficha muralla media ficha campo con escudo
-  	ciucame: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CASTILLO, cont:1 },        	//ciudad con un lado de campo con escudo
-  	ciucam2e: {u:CASTILLO, r:CAMPO, d:CASTILLO, l:CAMPO, cont:2 }        		//ciudad con 2 lados opuestos de campo con escudo
+	murcam:  {u:CAMPO,    r:CAMPO,    d:CASTILLO, l:CASTILLO, cont:5 },        		//media ficha muralla media ficha campo
+	c3mur: 	 {u:CAMINO,   r:CAMINO,   d:CAMINO,   l:CASTILLO, cont:3 },           		//cruce de 3 caminos con muralla al lado
+	mur2: 	 {u:CAMPO,    r:CASTILLO, d:CAMPO,    l:CASTILLO, cont:3 },               	//una muralla a cada lado de la ficha
+	m: 		 {u: CAMPO,   r:CAMPO,    d:CAMPO,    l:CAMPO ,   cont:4},                			//monasterio
+  	mc: 	 {u:CAMPO,    r:CAMINO,   d:CAMPO,    l:CAMPO,    cont:2 },                			//monasterio con camino
+	c4: 	 {u:CAMINO,   r:CAMINO,   d:CAMINO,   l:CAMINO,   cont:1 },                		//cruce de 4 caminos
+	cc: 	 {u:CAMINO,   r:CAMINO,   d:CAMPO,    l:CAMPO,    cont:9 },                		//camino curva
+ 	cr: 	 {u:CAMPO,    r:CAMINO,   d:CAMPO,    l:CAMINO,   cont:8 },                		//camino recto
+ 	c3: 	 {u:CAMINO,   r:CAMINO,   d:CAMINO,   l:CAMPO,    cont:4 },                		//cruce de 3 caminos
+	ciudad:  {u:CASTILLO, r:CASTILLO, d:CASTILLO, l:CASTILLO, cont:1},        	//todo ciudad con escudo
+	ciucam:  {u:CASTILLO, r:CAMPO,    d:CASTILLO, l:CASTILLO, cont:3 },        		//ciudad con un lado de campo
+	chmur: 	 {u:CASTILLO, r:CAMINO,   d:CASTILLO, l:CASTILLO, cont:1 },   			//camino hacia muralla
+	mur2c: 	 {u:CASTILLO, r:CAMPO,    d:CAMPO,    l:CASTILLO, cont:2 },        			//2 murallas en lados contiguos
+	mur1: 	 {u:CAMPO,    r:CAMPO,    d:CAMPO,    l:CASTILLO, cont:5 },        				//1 muralla en un lado y el resto campo
+ 	cmur: 	 {u:CAMINO,   r:CAMPO,    d:CAMINO,   l:CASTILLO, cont:3 },        			//camino recto con muralla al lado(una inicial)
+ 	ccmur: 	 {u:CAMINO,   r:CAMINO,   d:CAMPO,    l:CASTILLO, cont:3 },        			//camino con curva y con muralla al lado
+	ccmur3:  {u:CAMPO,    r:CAMINO,   d:CAMINO,   l:CASTILLO, cont:3 },        			//camino con curva y muralla al lado(otro)
+	ciucam2: {u:CASTILLO, r:CAMPO,    d:CASTILLO, l:CAMPO,    cont:1 },        		//ciudad con 2 lados opuestos de campo
+	ccmur2:  {u:CAMINO,   r:CAMINO,   d:CASTILLO, l:CASTILLO, cont:3 },	 			//camino con curva con 2 lados de ciudad contiguos
+ 	chmure:  {u:CASTILLO, r:CAMINO,   d:CASTILLO, l:CASTILLO, cont:2 }, 			//camino hacia muralla con escudo
+  	ccmur2e: {u:CAMINO,   r:CAMINO,   d:CASTILLO, l:CASTILLO, cont:2 },     		//camino con curva con 2 lados de ciudad contiguos con escudo
+  	murcame: {u:CAMPO,    r:CAMPO,    d:CASTILLO, l:CASTILLO, cont:2 },        		//media ficha muralla media ficha campo con escudo
+  	ciucame: {u:CASTILLO, r:CAMPO,    d:CASTILLO, l:CASTILLO, cont:1 },        	//ciudad con un lado de campo con escudo
+  	ciucam2e:{u:CASTILLO, r:CAMPO,    d:CASTILLO, l:CAMPO,    cont:2 }        		//ciudad con 2 lados opuestos de campo con escudo
 }; 
 
 	//Creo el array y luego hago el random del número que le pasamos al array
 	var Aleatorio = function(){
 
 		var conjunto = _.toArray(sprites);
-		var a = Math.floor(Math.random()*26)
-		alert(a);
-		alert(conjunto[a]);
+		var a = Math.floor(Math.random()*24);
+		//alert("Numero aleatorio: " + a);
+		//alert("Sprite aleatorio: " + conjunto[a]);
 		return conjunto[a];
 	};
 
@@ -88,6 +88,13 @@ var FichaPropiedades = {
     	    this.sprite = sprite;
 			this.prop = FichaPropiedades[sprite.nombre];
 	};
+	//BORRAR: FICHA DAD POR MI SIN SER ALEATORIA/////////////////////
+	var Dada = function(a){
+		var conjunto = _.toArray(sprites);
+		var FichaNueva = new Ficha(394, 263, conjunto[a]);
+		return FichaNueva;
+	};
+	////////////////////////////////////////////
 
 	//Función que llama a Elegir() para obtener una ficha aleatoria
 	Initialize = function(){
@@ -113,30 +120,30 @@ var FichaPropiedades = {
 	PosicionarFicha = function(Tablero, FichaPrueba, X, Y){
 		var nosepuede = 0;
 		if (Tablero[X][(Y-1)] != 0){ //Hay Ficha Arriba
-			//alert("Tablero Arriba: " + Tablero[X][(Y-1)].prop.d);
-			//alert("FichaPrueba: " + FichaPrueba.prop.u);
+			alert("Tablero Arriba: " + Tablero[X][(Y-1)].prop.d);
+			alert("FichaPrueba: " + FichaPrueba.prop.u);
 			if (Tablero[X][(Y-1)].prop.d != FichaPrueba.prop.u){ //Hay Ficha Arriba y Coincide
 				nosepuede = 1;
 			}
-			alert(nosepuede);
+			//alert(nosepuede);
 		}
 		if ((Tablero[(X+1)][Y] != 0) && (nosepuede == 0)){ //Hay Ficha Derecha
-			//alert("Tablero Derecha: " + Tablero[(X+1)][Y].prop.l);
-			//alert("FichaPrueba: " + FichaPrueba.prop.r);
+			alert("Tablero Derecha: " + Tablero[(X+1)][Y].prop.l);
+			alert("FichaPrueba: " + FichaPrueba.prop.r);
 			if (Tablero[(X+1)][Y].prop.l != FichaPrueba.prop.r){ //Hay Ficha Derecha y Coincide
 				nosepuede = 1;
 			}
 		}
 		if ((Tablero[X][(Y+1)] != 0) && (nosepuede == 0)){ //Hay Ficha Abajo
-			//alert("Tablero Abajo: " + Tablero[X][(Y+1)].prop.u);
-			//alert("FichaPrueba: " + FichaPrueba.prop.d);
+			alert("Tablero Abajo: " + Tablero[X][(Y+1)].prop.u);
+			alert("FichaPrueba: " + FichaPrueba.prop.d);
 			if (Tablero[X][(Y+1)].prop.u != FichaPrueba.prop.d){	// Hay Ficha Abajo y Coincide
 				nosepuede = 1;
 			}
 		}
 		if ((Tablero[(X-1)][Y] != 0) && (nosepuede == 0)){ //Hay Ficha Izquierda
-			//alert("Tablero Izquierda: " + Tablero[(X-1)][Y].prop.r);
-			//alert("FichaPrueba: " + FichaPrueba.prop.l);
+			alert("Tablero Izquierda: " + Tablero[(X-1)][Y].prop.r);
+			alert("FichaPrueba: " + FichaPrueba.prop.l);
 			if (Tablero[(X-1)][Y].prop.r != FichaPrueba.prop.l){ //Hay Ficha Izquierda y Coincide
 				nosepuede = 1; 
 			}
@@ -159,18 +166,37 @@ var FichaPropiedades = {
 		var FichaPrueba = Initialize();
 
 		//Comparar(Ficha1, Ficha2);
-		alert(Ficha1.sprite.nombre);
-		alert(Ficha2.sprite.nombre);
+		alert("Ficha1: " + Ficha1.sprite.nombre);
+		alert("Ficha2: " + Ficha2.sprite.nombre);
+		alert("FichaPrueba: " + FichaPrueba.sprite.nombre);
 		//Creamos tablero
 		Tablero = CrearTablero();
 		//Posicionamos ficha		
 		Tablero[36][36] = Ficha1;
 		Tablero[37][35] = Ficha2;
+		alert(Tablero[36][36]);
+		alert(Tablero[37][35]);
 		//Nos pasan una posición en el tablero mediante los ejes x e y
 		x = 37;	
 		y = 36;
 		//Hago una función para posicionar la ficha en la posición que me pasan		
-		var sol = PosicionarFicha(Tablero, FichaPrueba, x, y);	
+		var sol = PosicionarFicha(Tablero, FichaPrueba, x, y);
+		////////////Hago Prueba con fichas elegidas para que salga correcto/////////////
+		/*alert("Segunda Parte");
+		var FichaDada1 = Dada(3);
+		var FichaDada2 = Dada(0);
+		var FichaDadaP = Dada(17);
+		alert("Dada1: " + FichaDada1.sprite.nombre);
+		alert("Dada2: " + FichaDada2.sprite.nombre);
+		alert("DadaP: " + FichaDadaP.sprite.nombre);
+		//
+		Tablero[0][1] = FichaDada1;
+		Tablero[1][0] = FichaDada2;
+		alert(Tablero[0][1]);
+		alert(Tablero[1][0]);
+		x = 1;
+		y = 1;
+ 		var sol2 = PosicionarFicha(Tablero, FichaDadaP, x, y);*/
 		alert("Termina");
 	};
 
