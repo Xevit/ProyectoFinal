@@ -1,153 +1,382 @@
-// Hacemos primero un objeto dummy
 
-//       1
-//    -------
-//  4 |     | 2
-//    |     |
-//    -------
-//       3
 
-var CASTILLO = 'castillo';
-var CAMINO = 'camino';
-var CAMPO = 'campo;'
 
-var FichaPropiedades = {
-	murcam:  {nombre:"murcam", u:CAMPO,    r:CAMPO,    d:CASTILLO, l:CASTILLO, cont:5 },        		//media ficha muralla media ficha campo
-	c3mur: 	 {nombre:"c3mur", u:CAMINO,   r:CAMINO,   d:CAMINO,   l:CASTILLO, cont:3 },           		//cruce de 3 caminos con muralla al lado
-	mur2: 	 {nombre:"mur2", u:CAMPO,    r:CASTILLO, d:CAMPO,    l:CASTILLO, cont:3 },               	//una muralla a cada lado de la ficha
-	m: 		 {nombre:"m", u: CAMPO,   r:CAMPO,    d:CAMPO,    l:CAMPO ,   cont:4 },                			//monasterio
-  	mc: 	 {nombre:"mc", u:CAMPO,    r:CAMINO,   d:CAMPO,    l:CAMPO,    cont:2 },                			//monasterio con camino
-	c4: 	 {nombre:"c4", u:CAMINO,   r:CAMINO,   d:CAMINO,   l:CAMINO,   cont:1 },                		//cruce de 4 caminos
-	cc: 	 {nombre:"cc", u:CAMINO,   r:CAMINO,   d:CAMPO,    l:CAMPO,    cont:9 },                		//camino curva
- 	cr: 	 {nombre:"cr", u:CAMPO,    r:CAMINO,   d:CAMPO,    l:CAMINO,   cont:8 },                		//camino recto
- 	c3: 	 {nombre:"c3", u:CAMINO,   r:CAMINO,   d:CAMINO,   l:CAMPO,    cont:4 },                		//cruce de 3 caminos
-	ciudad:  {nombre:"ciudad", u:CASTILLO, r:CASTILLO, d:CASTILLO, l:CASTILLO, cont:1 },        	//todo ciudad con escudo
-	ciucam:  {nombre:"ciucam", u:CASTILLO, r:CAMPO,    d:CASTILLO, l:CASTILLO, cont:3 },        		//ciudad con un lado de campo
-	chmur: 	 {nombre:"chmur", u:CASTILLO, r:CAMINO,   d:CASTILLO, l:CASTILLO, cont:1 },   			//camino hacia muralla
-	mur2c: 	 {nombre:"mur2c", u:CASTILLO, r:CAMPO,    d:CAMPO,    l:CASTILLO, cont:2 },        			//2 murallas en lados contiguos
-	mur1: 	 {nombre:"mur1", u:CAMPO,    r:CAMPO,    d:CAMPO,    l:CASTILLO, cont:5 },        				//1 muralla en un lado y el resto campo
- 	cmur: 	 {nombre:"cmur", u:CAMINO,   r:CAMPO,    d:CAMINO,   l:CASTILLO, cont:3 },        			//camino recto con muralla al lado(una inicial)
- 	ccmur: 	 {nombre:"ccmur", u:CAMINO,   r:CAMINO,   d:CAMPO,    l:CASTILLO, cont:3 },        			//camino con curva y con muralla al lado
-	ccmur3:  {nombre:"ccmur3", u:CAMPO,    r:CAMINO,   d:CAMINO,   l:CASTILLO, cont:3 },        			//camino con curva y muralla al lado(otro)
-	ciucam2: {nombre:"ciucam2", u:CASTILLO, r:CAMPO,    d:CASTILLO, l:CAMPO,    cont:1 },        		//ciudad con 2 lados opuestos de campo
-	ccmur2:  {nombre:"ccmur2", u:CAMINO,   r:CAMINO,   d:CASTILLO, l:CASTILLO, cont:3 },	 			//camino con curva con 2 lados de ciudad contiguos
- 	chmure:  {nombre:"chmure", u:CASTILLO, r:CAMINO,   d:CASTILLO, l:CASTILLO, cont:2 }, 			//camino hacia muralla con escudo
-  	ccmur2e: {nombre:"ccmur2e", u:CAMINO,   r:CAMINO,   d:CASTILLO, l:CASTILLO, cont:2 },     		//camino con curva con 2 lados de ciudad,escudo
-  	murcame: {nombre:"murcame", u:CAMPO,    r:CAMPO,    d:CASTILLO, l:CASTILLO, cont:2 },        		//media ficha muralla media ficha campo con escudo
-  	ciucame: {nombre:"ciucame", u:CASTILLO, r:CAMPO,    d:CASTILLO, l:CASTILLO, cont:1 },        	//ciudad con un lado de campo con escudo
-  	ciucam2e:{nombre:"ciucam2e", u:CASTILLO, r:CAMPO,    d:CASTILLO, l:CAMPO,    cont:2 }        		//ciudad con 2 lados opuestos de campo con escudo
-}; 
-
-	//Creo el array y luego hago el random del número que le pasamos al array
-	var Aleatorio = function(){
-
-		var conjunto = _.toArray(FichaPropiedades);
-		var a = Math.floor(Math.random()*24);
-		//alert("Numero aleatorio: " + a);
-		//alert("Sprite aleatorio: " + conjunto[a]);
-		return conjunto[a];
-	};
-	
-	//Creamos tablero
-	CrearTablero = function(){
-		var x = new Array(72);
-		for (var i = 0; i < 72; i++){
-			x[i] = new Array(72);
-		}
-		for (var i = 0; i < 72; i++){
-			for (var j = 0; j < 72; j++){
-				x[i][j] = 0;
-			}
-		}
-		return x;
-	};
-
-	//Aquí veo si hay fichas alrededor
-	PosicionarFicha = function(Tablero, FichaPrueba, X, Y){
-		var nosepuede = 0;
-		if (Tablero[X][(Y-1)] != 0){ //Hay Ficha Arriba
-			//alert("Tablero Arriba: " + Tablero[X][(Y-1)].d);
-			//alert("FichaPrueba: " + FichaPrueba.u);
-			if (Tablero[X][(Y-1)].d != FichaPrueba.u){ //Hay Ficha Arriba y Coincide
-				nosepuede = 1;
-			}
-		}
-		if ((Tablero[(X+1)][Y] != 0) && (nosepuede == 0)){ //Hay Ficha Derecha
-			//alert("Tablero Derecha: " + Tablero[(X+1)][Y].l);
-			//alert("FichaPrueba: " + FichaPrueba.r);
-			if (Tablero[(X+1)][Y].l != FichaPrueba.r){ //Hay Ficha Derecha y Coincide
-				nosepuede = 1;
-			}
-		}
-		if ((Tablero[X][(Y+1)] != 0) && (nosepuede == 0)){ //Hay Ficha Abajo
-			//alert("Tablero Abajo: " + Tablero[X][(Y+1)].u);
-			//alert("FichaPrueba: " + FichaPrueba.d);
-			if (Tablero[X][(Y+1)].u != FichaPrueba.d){	// Hay Ficha Abajo y Coincide
-				nosepuede = 1;
-			}
-		}
-		if ((Tablero[(X-1)][Y] != 0) && (nosepuede == 0)){ //Hay Ficha Izquierda
-			//alert("Tablero Izquierda: " + Tablero[(X-1)][Y].r);
-			//alert("FichaPrueba: " + FichaPrueba.l);
-			if (Tablero[(X-1)][Y].r != FichaPrueba.l){ //Hay Ficha Izquierda y Coincide
-				nosepuede = 1; 
-			}
-		}
-		if (nosepuede == 1){
-			alert("No se coloca");
-			return 0;
-		}
-		else{
-			Tablero[X][Y] = FichaPrueba;
-			alert("Se coloca satisfactoriamente");
-			return 1;
-		}
-	};
-	
-	//Desde aquí ejecutamos todo el código.
-	EjecutaTotal = function(){
-		var Ficha1 = Aleatorio();
-		var Ficha2 = Aleatorio();
-		var FichaPrueba = Aleatorio();
-
-		//Comparar(Ficha1, Ficha2);
-		alert("Ficha1: " + Ficha1.nombre);
-		alert("Ficha2: " + Ficha2.nombre);
-		alert("FichaPrueba: " + FichaPrueba.nombre);
-		//Creamos tablero
-		Tablero = CrearTablero();
-		//Posicionamos ficha		
-		Tablero[36][36] = Ficha1;
-		Tablero[37][35] = Ficha2;
-		//Nos pasan una posición en el tablero mediante los ejes x e y
-		x = 37;	
-		y = 36;
-		//Hago una función para posicionar la ficha en la posición que me pasan		
-		var sol = PosicionarFicha(Tablero, FichaPrueba, x, y);
-		
-		////////////Hago Prueba con fichas elegidas para que salga correcto/////////////
-		/*alert("Segunda Parte");
-		var FichaDada1 = Dada(3);
-		var FichaDada2 = Dada(0);
-		var FichaDadaP = Dada(17);
-		alert("Dada1: " + FichaDada1.nombre);
-		alert("Dada2: " + FichaDada2.nombre);
-		alert("DadaP: " + FichaDadaP.nombre);
-		//
-		alert("Prop FichaDada1: " + FichaDadaP.u);
-		Tablero[0][1] = FichaDada1;
-		Tablero[1][0] = FichaDada2;
-		//alert("FichaDadaP: " + FichaDadaP.u);
-		x = 1;
-		y = 1;
- 		var sol2 = PosicionarFicha(Tablero, FichaDadaP, x, y);*/
-		alert("Termina");
-	};
 
 $(function() {
-	EjecutaTotal();
+
+
+	//iniciamos el tablero
+	Tablero.iniciar();
+/*
+	//comprobamos que efectivamente la coordenada (5,5) es un hueco de ficha vacio. 
+	var centro = Tablero.buscarxcoor(5,5);
+	console.log("Tablero se inicia como lleno:",centro.lleno);
+
+	//creamos una nueva ficha de tipo Ciudad1l2crect (por ejemplo) sin coordenadas
+	var nuevaficha = new ObjetoFicha(0,0,0,"Ciudad1l2crect");
+	//comprobamos que los parámetros se han rellenado
+	console.log("ficha creada:",nuevaficha.tipo,nuevaficha.arriba,nuevaficha.abajo,
+	                          nuevaficha.izda,nuevaficha.derecha,nuevaficha.escudo);
+	//comprobamos si la ficha ha girado
+	nuevaficha.girar();
+	console.log("ficha girada:",nuevaficha.tipo,nuevaficha.arriba,nuevaficha.abajo,
+	                          nuevaficha.izda,nuevaficha.derecha,nuevaficha.escudo);
+
+	//La colocamos en el tablero
+
+	Tablero.colocarficha(nuevaficha,5,5);
+
+
+
+	//comprobamos los parametros
+	var check= Tablero.buscarxcoor(5,5);
+	console.log("hueco lleno:",check.i,check.tipo,check.arriba,check.abajo,check.izda,check.derecha,check.escudo);
+	var check= Tablero.buscarxcoor(5,4);
+	console.log("huco vacio:",check.i,check.tipo,check.arriba,check.abajo,check.izda,check.derecha,check.escudo);
+
+
+	var nuevaficha2 = new ObjetoFicha(0,0,0,"Ciudad2lE");
+
+	Tablero.buscarCandidatos(nuevaficha2);
+	console.log("encaja con:",nuevaficha2.encajaCon);
+
+
+  //totalFichas= 0;
+	var robar = Tablero.robarFicha();
+	console.log("objeto tipo de ficha: ",robar);
+  var nuevaficha2 = new ObjetoFicha(0,0,0,robar);
+  
+  //La colocamos en el tablero
+
+	Tablero.colocarficha(nuevaficha2,7,5);
+	//comprobamos los parametros
+	var check= Tablero.buscarxcoor(7,5);
+	console.log("colocada ficha robada:",check.i,check.tipo,check.arriba,check.abajo,check.izda,check.derecha,check.escudo);
+
+
+  //Prueba cierraCamino colocando ficha "cierracamino" (no cruces)
+  Tablero.iniciar();
+	var nuevaficha = new ObjetoFicha(0,0,0,"Posada");
+	var x=Tablero.colocarficha(nuevaficha,3,1);	
+	x.seguidores.push({t:"Ladron",n:4,j:1,f:x});  //le metemos ladron
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+	Tablero.colocarficha(nuevaficha,3,2); 
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+	Tablero.colocarficha(nuevaficha,3,3); 
+	var nuevaficha = new ObjetoFicha(0,0,0,"Posada");
+	nuevaficha.girar();
+	nuevaficha.girar();
+	var nuevaficha = Tablero.colocarficha(nuevaficha,3,4); 
+	console.log("cierra camino1: ",Tablero.cierraCamino(nuevaficha));
+
+	//Prueba cierra camino con cruces
+
+	Tablero.iniciar();
+	                      //por arriba (cerrado)
+	var nuevaficha = new ObjetoFicha(0,0,0,"Posada");
+	Tablero.colocarficha(nuevaficha,5,3);
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+	Tablero.colocarficha(nuevaficha,5,4); 
+		                      // por abajo (cerrado)
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+	Tablero.colocarficha(nuevaficha,5,6); 
+	var nuevaficha = new ObjetoFicha(0,0,0,"Posada");
+	nuevaficha.girar();
+	nuevaficha.girar();
+	Tablero.colocarficha(nuevaficha,5,7);
+		                      // por la izda (cerrado)
+	var nuevaficha = new ObjetoFicha(0,0,0,"Posada");
+	nuevaficha.girar();
+	Tablero.colocarficha(nuevaficha,4,5);
+	                      // por la dcha (abierto)
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+	nuevaficha.girar();
+	Tablero.colocarficha(nuevaficha,6,5); 
+
+ 
+	                      //en el centro (la que cierra)
+	var nuevaficha = new ObjetoFicha(0,0,0,"Ccruce");
+	Tablero.colocarficha(nuevaficha,5,5); 
+	Tablero.cierraCamino(nuevaficha,1);
+	
+	//Prueba cierraCamino colocando ficha intermedia
+  Tablero.iniciar();
+	var nuevaficha = new ObjetoFicha(0,0,0,"Posada");
+	Tablero.colocarficha(nuevaficha,8,1);
+
+	var nuevaficha = new ObjetoFicha(0,0,0,"Posada");
+	nuevaficha.girar();
+	Tablero.colocarficha(nuevaficha,7,3);
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rcurva");
+	nuevaficha.girar();
+	nuevaficha.girar();
+	nuevaficha.girar();
+	var Rcurva83= Tablero.colocarficha(nuevaficha,8,3);	
+	var lista= Tablero.colocarseguidor(Rcurva83);
+	Rcurva83.seguidores.push(lista[0]);
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta"); 
+	Tablero.colocarficha(nuevaficha,8,2);
+	console.log("cierra camino2: ",Tablero.cierraCamino(nuevaficha));
+	
+	//Prueba cierraCamino redondo, sin "cierracaminos"
+	Tablero.iniciar();	
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rcurva");
+	Tablero.colocarficha(nuevaficha,5,5);
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+	var x=Tablero.colocarficha(nuevaficha,5,6);
+	x.seguidores.push({t:"Ladron",n:4,j:1,f:x});  //le metemos ladron
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+  nuevaficha.girar();
+  Tablero.colocarficha(nuevaficha,4,5);
+  var nuevaficha = new ObjetoFicha(0,0,0,"Rcurva");
+  nuevaficha.girar();
+	Tablero.colocarficha(nuevaficha,3,5);
+	console.log("lista: ", Tablero.colocarseguidor(nuevaficha)); // lista de seguidores
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+	Tablero.colocarficha(nuevaficha,3,6);
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rcurva");
+	nuevaficha.girar();
+	nuevaficha.girar();
+	Tablero.colocarficha(nuevaficha,3,7);
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+  nuevaficha.girar();
+  Tablero.colocarficha(nuevaficha,4,7);
+  var nuevaficha = new ObjetoFicha(0,0,0,"Rcurva");
+  nuevaficha.girar();
+	nuevaficha.girar();
+	nuevaficha.girar();
+	Tablero.colocarficha(nuevaficha,5,7);
+	console.log("cierra camino3: ",Tablero.cierraCamino(nuevaficha))	
+	
+
+	//Prueba cierra camino sólo dos fichas
+	Tablero.iniciar();	
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+	var x=Tablero.colocarficha(nuevaficha,5,5);
+	x.seguidores.push({t:"Ladron",n:4,j:1,f:x});  //le metemos ladron
+	console.log("cierra camino4: ",Tablero.cierraCamino(nuevaficha))	
+
+	
+	//Prueba error al colocar fichas que no encajan
+	Tablero.iniciar();
+	var nuevaficha = new ObjetoFicha(0,0,0,"Posada");
+	Tablero.colocarficha(nuevaficha,8,1);
+  var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+  nuevaficha.girar();
+	console.log("si no encaja 0:",Tablero.colocarficha(nuevaficha,8,2)); //No deberia encajar ---> devuelve 0
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+	console.log("si no encaja 0:",Tablero.colocarficha(nuevaficha,8,1)); //No deberia encajar ----> devuelve 0
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+	console.log("si encaja objeto ficha:",Tablero.colocarficha(nuevaficha,8,2)); //Deberia encajar ----> devuelve la ficha colocada
+
+*/
+    //Prueba de cierra Castillo 1
+    Tablero.iniciar();
+    var nuevaficha = new ObjetoFicha(0,0,0,'Ciudad1l');
+    nuevaficha.girar();
+    nuevaficha.girar();
+    Tablero.colocarficha(nuevaficha,1,1);
+    var nuevaficha = new ObjetoFicha(0,0,0,'Ciudad1l');
+    Tablero.colocarficha(nuevaficha,1,2);
+    console.log("cierra castillo1: ",Tablero.cierraCastillo(nuevaficha));
+
+    //Prueba de cierra Castillo 2
+
+    Tablero.iniciar();                                                      //      2       1
+    var nuevaficha = new ObjetoFicha(0,0,0,'Ciudad1l');                     // --------------------
+    nuevaficha.girar();                                                     // -       *-*        -
+    Tablero.colocarficha(nuevaficha,2,1);                                   // -   *****-**       -
+    var nuevaficha = new ObjetoFicha(0,0,0,'Ciudad2l');                     // -********-*        -
+    nuevaficha.girar();                                                     // --------------------
+    nuevaficha.girar();                                                     // -********-
+    Tablero.colocarficha(nuevaficha,1,1);                                   // -  ***** -
+    var nuevaficha = new ObjetoFicha(0,0,0,'Ciudad1l');                     // -        -   
+    Tablero.colocarficha(nuevaficha,1,2);                                   // ----------
+    console.log("cierra castillo2: ",Tablero.cierraCastillo(nuevaficha));   //      3  
+
+    // Prueba de cierra Castillo 3
+    Tablero.iniciar();
+    var nuevaficha = new ObjetoFicha(0,0,0, 'Ciudadext');
+//    nuevaficha.girar();
+    Tablero.colocarficha(nuevaficha, 4,2);
+    var nuevaficha = new ObjetoFicha(0,0,0, 'Ciudad3l');
+    nuevaficha.girar();
+    nuevaficha.girar();
+    Tablero.colocarficha(nuevaficha, 3,2);
+    var nuevaficha = new ObjetoFicha(0,0,0, 'Ciudad2l');
+    nuevaficha.girar();
+    nuevaficha.girar();
+    Tablero.colocarficha(nuevaficha, 2,2);
+    var nuevaficha = new ObjetoFicha(0,0,0, 'Ciudad2l');
+    nuevaficha.girar();
+    nuevaficha.girar();
+    nuevaficha.girar();
+    Tablero.colocarficha(nuevaficha, 2,3);
+    var nuevaficha = new ObjetoFicha(0,0,0, 'CiudadE');
+    Tablero.colocarficha(nuevaficha, 3,3);
+    var nuevaficha = new ObjetoFicha(0,0,0, 'Ciudad1l');
+    nuevaficha.girar();
+    Tablero.colocarficha(nuevaficha, 4,3);
+    var nuevaficha = new ObjetoFicha(0,0,0, 'Ciudad2l');
+    nuevaficha.girar();
+    nuevaficha.girar();
+    nuevaficha.girar();
+    Tablero.colocarficha(nuevaficha, 3,4);
+    var nuevaficha = new ObjetoFicha(0,0,0, 'Ciudad1l');
+    nuevaficha.girar();
+    Tablero.colocarficha(nuevaficha, 5,4);
+    var nuevaficha = new ObjetoFicha(0,0,0, 'Ciudadext');
+    Tablero.colocarficha(nuevaficha, 4,4); 
+    console.log("cierra castillo3: ",Tablero.cierraCastillo(nuevaficha));
+
+    //Cierra Claustro con Catedral
+    Tablero.iniciar();
+    var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+    Tablero.colocarficha(nuevaficha,7,5);
+    var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+    nuevaficha.girar(); 
+    Tablero.colocarficha(nuevaficha,5,4);
+    var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+    nuevaficha.girar();
+    Tablero.colocarficha(nuevaficha,6,4);
+    var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+    nuevaficha.girar();
+    Tablero.colocarficha(nuevaficha,6,6);
+    var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+    nuevaficha.girar();   
+    Tablero.colocarficha(nuevaficha,5,6);
+    var nuevaficha = new ObjetoFicha(0,0,0,"Rcurva");
+    Tablero.colocarficha(nuevaficha,7,4);
+    var nuevaficha = new ObjetoFicha(0,0,0,"Rcurva");
+    nuevaficha.girar(); 
+    Tablero.colocarficha(nuevaficha,4,4);
+    var nuevaficha = new ObjetoFicha(0,0,0,"Rcurva");
+    nuevaficha.girar(); 
+    nuevaficha.girar(); 
+    Tablero.colocarficha(nuevaficha,4,6);
+    var nuevaficha = new ObjetoFicha(0,0,0,"Rcurva");
+    nuevaficha.girar(); 
+    nuevaficha.girar(); 
+    nuevaficha.girar(); 
+    Tablero.colocarficha(nuevaficha,7,6);
+    var nuevaficha = new ObjetoFicha(0,0,0,"Catedral");
+    nuevaficha.seguidores.push({t:"Monje",n:8});
+    Tablero.colocarficha(nuevaficha,5,5); 
+//    var nuevaficha = new ObjetoFicha(0,0,0,"Catedral");
+//    Tablero.colocarficha(nuevaficha,6,5); 
+//    var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+//    Tablero.colocarficha(nuevaficha,4,5);
+    console.log("cierra claustro: ",Tablero.cierraClaustro(nuevaficha));
+    
+
+/*
+  // Prueba la lista de seguidores.
+  Tablero.iniciar();
+	var nuevaficha = new ObjetoFicha(0,0,0,"Posada");
+	console.log("lista: ", Tablero.colocarseguidor(nuevaficha));
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rcurva");
+	console.log("lista: ", Tablero.colocarseguidor(nuevaficha));
+
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+  var x=Tablero.colocarficha(nuevaficha,5,5);
+	x.seguidores.push({t:"Ladron",n:4,j:1,f:x});  //le metemos ladron
+  nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");	
+  Tablero.colocarficha(nuevaficha,5,6);
+	console.log("cierra camino4: ",Tablero.cierraCamino(nuevaficha));	
+	console.log("lista recta con ladron arriba: ", Tablero.colocarseguidor(nuevaficha));
+  nuevaficha = new ObjetoFicha(0,0,0,"Tcruce");	
+  Tablero.colocarficha(nuevaficha,5,4);
+	console.log("lista cruce con ladron arriba: ", Tablero.colocarseguidor(nuevaficha));
+
+
+
+
+
+*/
+/////////////////////////// SIMULACRO PUNTUACIONES CAMINO
+
+
+  Tablero.listaJugadores.push(new ObjetoJugador("Paco",23,1));
+  Tablero.listaJugadores.push(new ObjetoJugador("Pepe",88,2));
+  Tablero.listaJugadores.push(new ObjetoJugador("Menganito",34,3));
+  Tablero.listaJugadores.push(new ObjetoJugador("Fulanito",12,4));
+
+  Obj=Tablero.listaJugadores;
+  console.log("PTS-  j1:",Obj[0].puntos," j2:",Obj[1].puntos," j3:",Obj[2].puntos," j4:",Obj[3].puntos);
+  
+  Tablero.iniciar();
+	var nuevaficha = new ObjetoFicha(0,0,0,"Posada");
+	var x=Tablero.colocarficha(nuevaficha,3,1);	
+	x.seguidores.push({t:"Ladron",n:4,j:1,f:x});  //le metemos ladron
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+	Tablero.colocarficha(nuevaficha,3,2); 
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+	x = Tablero.colocarficha(nuevaficha,3,4); 
+	x.seguidores.push({t:"Ladron",n:0,j:2,f:x});  //le metemos ladron
+	var nuevaficha = new ObjetoFicha(0,0,0,"Posada");
+	nuevaficha.girar();
+	nuevaficha.girar();
+	var nuevaficha = Tablero.colocarficha(nuevaficha,3,5); 
+	var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+	Tablero.colocarficha(nuevaficha,3,3);
+	console.log("cierraCamino Puntos: ",Tablero.cierraCamino(nuevaficha,1));
+	
+	console.log("PTS-  j1:",Obj[0].puntos," j2:",Obj[1].puntos," j3:",Obj[2].puntos," j4:",Obj[3].puntos);
+
+  Tablero.listaJugadores=[];
+
+  Tablero.listaJugadores.push(new ObjetoJugador("Paco",23,1));
+  Tablero.listaJugadores.push(new ObjetoJugador("Pepe",88,2));
+  Tablero.listaJugadores.push(new ObjetoJugador("Menganito",34,3));
+  Tablero.listaJugadores.push(new ObjetoJugador("Fulanito",12,4));
+
+  Obj=Tablero.listaJugadores;
+  console.log("PTS-  j1:",Obj[0].puntos,"-",Obj[0].n_seguidores," j2:",Obj[1].puntos," j3:",Obj[2].puntos," j4:",Obj[3].puntos);
+    Tablero.iniciar();   
+    var nuevaficha = new ObjetoFicha(0,0,0,"Rcurva");
+    Tablero.colocarficha(nuevaficha,5,5);
+    var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+    var x=Tablero.colocarficha(nuevaficha,5,6);
+    Tablero.colocaSeguidor(x,{t:"Ladron",n:4,j:1,f:x},Obj[0]);
+    console.log("Coloca seguidor-->",Obj[0].n_seguidores,x.seguidores);  //le metemos ladron
+    var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+  nuevaficha.girar();
+  Tablero.colocarficha(nuevaficha,4,5);
+  var nuevaficha = new ObjetoFicha(0,0,0,"Rcurva");
+  nuevaficha.girar();
+   Tablero.colocarficha(nuevaficha,3,5);
+    var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+    var x = Tablero.colocarficha(nuevaficha,3,6);
+    x.seguidores.push({t:"Ladron",n:0,j:2,f:x},{t:"Granja",n:3,j:2,f:x});  //le metemos ladron
+    var nuevaficha = new ObjetoFicha(0,0,0,"Rcurva");
+    nuevaficha.girar();
+    nuevaficha.girar();
+    Tablero.colocarficha(nuevaficha,3,7);
+    var nuevaficha = new ObjetoFicha(0,0,0,"Rrecta");
+  nuevaficha.girar();
+  Tablero.colocarficha(nuevaficha,4,7);
+  var nuevaficha = new ObjetoFicha(0,0,0,"Ccruce");
+  nuevaficha.girar();
+
+    nuevaficha.girar();
+    nuevaficha.girar();
+    Tablero.colocarficha(nuevaficha,5,7);
+    console.log("cierra camino redondo: ",Tablero.cierraCamino(nuevaficha,1));
+    console.log("PTS-  j1:",Obj[0].puntos,"-",Obj[0].n_seguidores," j2:",Obj[1].puntos," j3:",Obj[2].puntos," j4:",Obj[3].puntos);
+  
+    console.log("cierra camino redondo repetido: ",Tablero.cierraCamino(nuevaficha,1));
+    console.log("PTS-  j1:",Obj[0].puntos,"-",Obj[0].n_seguidores," j2:",Obj[1].puntos," j3:",Obj[2].puntos," j4:",Obj[3].puntos);
+
+
+  nuevaficha.girar();
+  nuevaficha.girar();
+  Tablero.colocarficha(nuevaficha,5,7);
+  console.log("cierra camino redondo: ",Tablero.cierraCamino(nuevaficha,1));
+  console.log("PTS-  j1:",Obj[0].puntos,"-",Obj[0].n_seguidores," j2:",Obj[1].puntos," j3:",Obj[2].puntos," j4:",Obj[3].puntos);
+
+  console.log("cierra camino redondo repetido: ",Tablero.cierraCamino(nuevaficha,2));
+  console.log("PTS-  j1:",Obj[0].puntos,"-",Obj[0].n_seguidores," j2:",Obj[1].puntos," j3:",Obj[2].puntos," j4:",Obj[3].puntos);
+
 });
-
-
 
 
