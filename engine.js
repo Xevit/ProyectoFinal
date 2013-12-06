@@ -987,11 +987,110 @@ var Tablero = new function(){
 		else{return [false,false,0]}
   }
 
-//Coloca seguidores.
+//Coloca seguidores. /// ¿¿Esto sirve??
 
 	this.colocaSeguidor = function(ficha,seguidor,Objugador){
 		ficha.seguidores.push(seguidor);
 		Objugador.n_seguidores--;
+	}
+	
+// Aquí vamos a definir cuando al final del juego tengamos que contar las puntuaciónes del Campo                     			|7 0 1|
+// Siempre que haya ficha, es decir para llamar a esta función deberá haber un seguidor en ella.                     			|6 8 2|
+// posiseguidor va a ser un array de numeros entre el 0 y el 7 (En el 8 no puede estar) donde va a estar colocado el seguidor.  |5 4 3|
+	this.cierraCampo = function(ficha, posiseguidor){
+		var Campo = [
+			'Catedral',
+			'Ciudad3l',
+			'Ciudad3lE',
+			'Ciudad2l',
+			'Ciudad2lE',
+			'CiudadPuerta',
+			'CiudadPuertaE',
+			'Ciudadext',
+			'Ciudad1ll',
+			'Ciudad1l'
+		];
+		var CallesYCampo = [
+			'Rrecta',
+			'Rcurva',
+			'Posada',
+			'Ciudad1l2crect',
+			'Ciudadcurvder',
+			'Ciudadcurvizq',
+			'Tcruce'
+		];
+		var Calles = [
+			'Ccruce',
+			'Ciudad3lc',
+			'Ciudad3lcE',
+			'Ciudad2lc',
+			'Ciudad2lcE',
+			'Ciudad1lcruce'
+		];
+		var fichapasada = [];
+		
+		var primeraficha = function(ficha, posiseguidor){
+			//Solo en un lado y arriba			
+			if (posiseguidor = 0){
+
+			}
+			if (posiseguidor = 1){
+							
+			}
+			if (posiseguidor = 2)
+			if (posiseguidor = 3)
+			if (posiseguidor = 4)
+			if (posiseguidor = 5)
+			if (posiseguidor = 6)
+			if (posiseguidor = 7)
+			if (posiseguidor = 8)	
+		};		
+		//Comprobamos donde está nuestra ficha actual
+		var buscaficha = function(ficha, direccion){
+			fichapasada.push({x: ficha.x, y: ficha.y});
+			//La vamos a tener en uno de estos arrays
+			if (CallesYCampo.indexOf(ficha)){f_CallesYCampo(ficha, direccion)}
+			else if (Calles.indexOf(ficha)){f_Calles(ficha, direccion)}
+			else if (Campo.indexOf(ficha)){f_Campo(ficha, direccion)}
+		};
+		//Esta funcion solamente analiza las fichas que solo tienen campo y prohibe la dirección que acabamos de estar
+		var f_Campo = function(ficha, direccionpro){
+			if (!fichapasada.indexOf(ficha)){
+				fichapasada.push({x: ficha.x, y: ficha.y});			
+				puntos++;
+				if (ficha.arriba = "Campo" && direccionpro != "arriba"){
+					
+				}
+				if (ficha.abajo = "Campo" && direccionpro != "abajo"){
+
+				}
+				if (ficha.izquierda = "Campo" && direccionpro != "izquierda"){
+				
+				}
+				if (ficha.derecha = "Campo" && direccionpro != "derecha"){
+
+				}
+			}
+
+		};
+		var f_Calles = function(ficha, direccionpro){
+			if (!fichapasada.indexOf(ficha)){
+				fichapasada.push({x: ficha.x, y: ficha.y});
+				puntos++;
+				if (ficha.arriba = "Rue" && direccionpro != "arriba"){
+
+				}	
+				if (ficha.abajo = "Rue" && direccionpro != "abajo"){
+
+				}
+				if (ficha.izquierda = "Rue" && direccionpro != "izquierda"){
+
+				}
+				if (ficha.izquierda = "Rue" && direccionpro != "derecha"){
+
+				}
+			}
+		};
 	}
 };
 
