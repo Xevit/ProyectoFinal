@@ -994,10 +994,10 @@ var Tablero = new function(){
 		Objugador.n_seguidores--;
 	}
 	
-// Aquí vamos a definir cuando al final del juego tengamos que contar las puntuaciónes del Campo                     			|7 0 1|
-// Siempre que haya ficha, es decir para llamar a esta función deberá haber un seguidor en ella.                     			|6 8 2|
-// posiseguidor va a ser un array de numeros entre el 0 y el 7 (En el 8 no puede estar) donde va a estar colocado el seguidor.  |5 4 3|
-	this.cierraCampo = function(ficha, posiseguidor){
+// Aquí vamos a definir cuando al final del juego tengamos que contar las puntuaciónes del Campo                     			
+// Siempre que haya ficha, es decir para llamar a esta función deberá haber un seguidor en ella.                     			
+// posiseguidor va a ser: 		
+	this.cierraCampo = function(ficha, pseguidor){
 		var Campo = [
 			'Catedral',
 			'Ciudad3l',
@@ -1028,22 +1028,42 @@ var Tablero = new function(){
 			'Ciudad1lcruce'
 		];
 		var fichapasada = [];
-		
-		var primeraficha = function(ficha, posiseguidor){
-			//Solo en un lado y arriba			
-			if (posiseguidor = 0){
+		//Función inicial donde tenemos colocada la ficha
+		var primeraficha = function(ficha, pseguidor){
+			//Arriba			
+			if (pseguidor == 0){
+				if (ficha.izquierda == "Rue"){		
+					
+				}		
+			}
+			//Arriba Derecha
+			if (pseguidor == 1){
+				
+			}
+			//Derecha
+			if (pseguidor == 2){
+				
+			}
+			//Abajo Derecha
+			if (pseguidor == 3){
 
 			}
-			if (posiseguidor = 1){
-							
+			//Abajo
+			if (pseguidor == 4){
+				
 			}
-			if (posiseguidor = 2)
-			if (posiseguidor = 3)
-			if (posiseguidor = 4)
-			if (posiseguidor = 5)
-			if (posiseguidor = 6)
-			if (posiseguidor = 7)
-			if (posiseguidor = 8)	
+			//Abajo Izquierda
+			if (pseguidor == 5){
+
+			}
+			//Izquierda
+			if (pseguidor == 6){		
+				
+			}
+			//Arriba Izquierda
+			if (pseguidor == 7){
+
+			}		
 		};		
 		//Comprobamos donde está nuestra ficha actual
 		var buscaficha = function(ficha, direccion){
@@ -1058,16 +1078,16 @@ var Tablero = new function(){
 			if (!fichapasada.indexOf(ficha)){
 				fichapasada.push({x: ficha.x, y: ficha.y});			
 				puntos++;
-				if (ficha.arriba = "Campo" && direccionpro != "arriba"){
+				if (ficha.arriba == "Campo" && direccionpro != "arriba"){
 					
 				}
-				if (ficha.abajo = "Campo" && direccionpro != "abajo"){
+				if (ficha.abajo == "Campo" && direccionpro != "abajo"){
 
 				}
-				if (ficha.izquierda = "Campo" && direccionpro != "izquierda"){
+				if (ficha.izquierda == "Campo" && direccionpro != "izquierda"){
 				
 				}
-				if (ficha.derecha = "Campo" && direccionpro != "derecha"){
+				if (ficha.derecha == "Campo" && direccionpro != "derecha"){
 
 				}
 			}
@@ -1076,16 +1096,17 @@ var Tablero = new function(){
 		var f_Calles = function(ficha, direccionpro){
 			if (!fichapasada.indexOf(ficha)){
 				fichapasada.push({x: ficha.x, y: ficha.y});
-				if (ficha.arriba = "Rue" && direccionpro != "arriba"){
+				puntos++;
+				if (ficha.arriba == "Rue" && direccionpro != "arriba"){
 
 				}	
-				if (ficha.abajo = "Rue" && direccionpro != "abajo"){
+				if (ficha.abajo == "Rue" && direccionpro != "abajo"){
 
 				}
-				if (ficha.izquierda = "Rue" && direccionpro != "izquierda"){
+				if (ficha.izquierda == "Rue" && direccionpro != "izquierda"){
 
 				}
-				if (ficha.izquierda = "Rue" && direccionpro != "derecha"){
+				if (ficha.izquierda == "Rue" && direccionpro != "derecha"){
 
 				}
 			}
