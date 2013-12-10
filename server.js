@@ -4,27 +4,33 @@
 
 Meteor.methods({
 
-	Tablero.colocarficha: function (ficha,ox,oy) {
+	ColocaFicha: function (ficha,ox,oy) {
+		ficha = Tablero.colocarficha;
 		return ficha;
 	}
 
-	Tablero.robarficha: function() {
+	RobaFicha: function() {
+		ficha = Tablero.robarficha;
 		return ficha;
 	}
 
-	Tablero.colocarseguidor: function(ficha){
+	ColocaSeguidor: function(ficha){
+		seguidor = Tablero.colocarseguidor
 		return seguidor;
 	}
 
-	Tablero.cierracamino: function(ficha,flag) {
+	CierraCamino: function(ficha,flag) {
+		puntos = Tablero.cierracamino
 		return puntos;
 	}
 	
-	Tablero.cierracastillo: function(ficha) {
+	CierraCastillo: function(ficha) {
+		puntos = Tablero.cierracastillo
 		return puntos;
 	}
 
-	Tablero.cierraclaustro: function(ficha){
+	CierraClaustro: function(ficha){
+		puntos = Tablero.cierraclaustro
 		return puntos;
 	}
 
@@ -36,7 +42,13 @@ Meteor.methods({
 		
 	}*/
 
-	objetoficha: function(x,y,i,tipoficha){}	
+	ObjetoFicha: function(x,y,i,tipoficha){
+		this.i=i; //nos indica la posición real en la lista tablero
+		this.x=x; // x e y nos indican la posición 
+		this.y=y; // ficticia en el tablero virtual
+		this.lleno=false;
+		this.tipo=tipoficha;	
+	}	
 
 });
 

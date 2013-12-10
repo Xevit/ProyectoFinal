@@ -997,7 +997,7 @@ var Tablero = new function(){
 // Aquí vamos a definir cuando al final del juego tengamos que contar las puntuaciónes del Campo                     			
 // Siempre que haya ficha, es decir para llamar a esta función deberá haber un seguidor en ella.                     			
 // posiseguidor va a ser: 		
-	this.cierraCampo = function(ficha, pseguidor){
+	/*this.cierraCampo = function(ficha, pseguidor){
 		var Campo = [
 			'Catedral',
 			'Ciudad3l',
@@ -1112,7 +1112,7 @@ var Tablero = new function(){
 			}
 		};
 	}
-};
+};*/
 
 
 
